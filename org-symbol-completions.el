@@ -9,8 +9,8 @@
   "complete org-entities code to symbols"
   (interactive)
   (setq start-pos (point))
-
-  (backward-word 1)  
+ 
+  (backward-word 1)
   (forward-word 1)
   (setq end-pos (point))
   
@@ -19,10 +19,14 @@
   (when (string= is_slash "\\")
     (setq word (buffer-substring-no-properties (point) end-pos))
     (setq symbol (get-symbol-from-org-entites word))
-    (setq head (- (point) 1))
-    (delete-region head end-pos)
-    (insert symbol)
+    (if symbol
+      (progn 
+	(setq head (- (point) 1))
+	(delete-region head end-pos)
+	(insert symbol))
+      (print "org-symbol-completions cant find symbols" t)
+      )
     )
   )
 
-(global-set-key "\C-x\t" 'org-symbol-completions)
+(global-set-key "\M-s\t" 'org-symbol-completions)
