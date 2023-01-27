@@ -2,7 +2,7 @@
   "return symbol from org-entites (you can see list of symbols that can
    be converted to org-entites)."
   (setq entities-list (assoc name org-entities))
-  (nth (- (safe-length test) 1) entities-list)
+  (nth (- (safe-length entities-list) 1) entities-list)
   )
 
 (defun org-symbol-completions ()
@@ -25,4 +25,4 @@
     )
   )
 
-(global-set-key "\M-\t" 'org-symbol-completions)
+(global-set-key "\C-x\t" 'org-symbol-completions)
